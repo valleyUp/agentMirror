@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta http-equiv="Cache-Control" content="no-store"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Coding Agent 内网镜像</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head>
+<body>
+<header><span class="brand">AM / AGENT MIRROR</span><a href="catalog.json">资源清单 ↗</a></header>
+<main>
+<div class="eyebrow">内网开发工具分发</div>
+<h1>你的下一位编程搭档，<br>从这里安装。</h1>
+<p class="lead">选择工具、版本和系统，复制命令即可从公司内网安装。</p>
+<div id="status" class="notice">正在读取镜像目录…</div>
+<section id="installer">
+<h2>01 / 选择安装内容</h2>
+<div class="fields"><label>工具<select id="tool"><option value="claude">Claude Code</option><option value="codex">Codex CLI</option><option value="dsh">DeepSeek Harness</option></select></label><label>版本<select id="version"></select></label><label>操作系统<select id="platform"></select></label></div>
+<div id="node-step">
+<h2>02 / 准备 Node.js</h2>
+<p id="node-requirement"></p>
+<p>先运行 <code>node -v</code>。没有 Node.js 时，安装本页提供的 <strong id="node-version"></strong>。</p>
+<div id="node-command-box" class="codebox"><button type="button" data-copy-target="node-command">复制命令</button><pre><code id="node-command"></code></pre></div>
+<p id="node-download-help" class="small"></p>
+<div id="node-downloads"></div>
+
+</div>
+<h2 id="install-heading">03 / 安装</h2>
+<p id="install-help"></p>
+<div class="codebox"><button id="copy" type="button" data-copy-target="command">复制命令</button><pre><code id="command"></code></pre></div>
+<p id="install-note" class="small"></p>
+<h2 id="verify-heading">04 / 启动</h2>
+<pre><code id="verify"></code></pre>
+<p>首次启动时，按公司提供的模型地址和凭据完成配置。</p>
+</section>
+<section id="resource-section">
+<h2>附加下载</h2>
+<div id="assets"></div>
+</section>
+<section>
+<h2>需要帮助？</h2>
+<details><summary>安装后找不到命令？</summary><p>Linux 把 <code>~/.local/bin</code> 加入 PATH，当前终端可执行 <code>export PATH="$HOME/.local/bin:$PATH"</code>。Windows 把 <code>%APPDATA%\npm</code> 加入 PATH。</p></details>
+<details><summary>DSH 需要哪个 Node.js？</summary><p>Node.js 22.19+（22.x）或 24+。可用本页的 Node.js 安装命令。</p></details>
+<details><summary>Windows 7 能用吗？</summary><p>不能在 Windows 7 本机运行。请在受支持的系统上安装，通过远程桌面或 SSH 使用。</p></details>
+<details><summary>模型连接配置</summary><p>镜像只负责安装。模型地址、协议和凭据使用公司提供的配置，密钥只保存在用户本机。</p></details>
+</section>
+</main>
+<footer>AGENT MIRROR · 内网分发</footer>
+</body></html>

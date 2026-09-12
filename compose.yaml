@@ -1,0 +1,10 @@
+services:
+  mirror:
+    image: agent-mirror:${MIRROR_TAG:-20260911}
+    pull_policy: never
+    ports:
+      - "${MIRROR_PORT:-8080}:8080"
+    environment:
+      PUBLIC_URL: ${PUBLIC_URL:-}
+    restart: unless-stopped
+    # Deliberately no resource volume: every image carries its own snapshot.

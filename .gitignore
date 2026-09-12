@@ -1,0 +1,15 @@
+node_modules/
+dist/
+dist.staging/
+dist.previous/
+.mirror-work/
+releases/
+*.tar
+*.tar.gz
+*.tgz
+*.log
+/core
+core.[0-9]*
+.DS_Store
+.env
+.env.*

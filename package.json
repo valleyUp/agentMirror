@@ -1,0 +1,31 @@
+{
+  "name": "agent-mirror",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "node --test test/*.test.ts",
+    "validate": "node src/build.ts validate",
+    "build:mirror": "node src/build.ts build",
+    "add-latest": "node src/add-latest.ts",
+    "remove-version": "node src/remove-version.ts",
+    "smoke": "node src/smoke.ts"
+  },
+  "dependencies": {
+    "semver": "7.8.5",
+    "tar": "7.5.22",
+    "verdaccio": "6.10.3",
+    "yaml": "2.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "@types/semver": "7.7.1",
+    "jsdom": "30.0.1",
+    "npm": "11.12.1",
+    "typescript": "5.9.3"
+  }
+}

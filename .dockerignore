@@ -1,0 +1,13 @@
+node_modules
+dist
+dist.previous
+dist.staging
+reports
+.mirror-work
+.mirror-work
+.git
+*.tar
+*.tar.gz
+*.tgz
+core
+core.*

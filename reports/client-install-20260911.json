@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-11",
+  "environment": "Ubuntu 24.04.4 LTS; Docker internal network; fresh user state",
+  "node": "24.15.0",
+  "tool": "@deepseek-ai/dsh@0.1.2-rc.1",
+  "npmVersions": [
+    "11.12.1",
+    "12.0.2"
+  ],
+  "checks": {
+    "nodeInstallerPreservesBundledNpm": "pass",
+    "defaultPrefixUnchanged": "pass",
+    "explicitUserPrefix": "pass",
+    "currentShellCommandResolution": "pass",
+    "newBashCommandResolution": "pass",
+    "dshVersionCommand": "pass",
+    "nativeModuleLoading": [
+      "koffi",
+      "sharp",
+      "node-pty"
+    ]
+  },
+  "toolInstallerSha256": "6b356df727dc7b0af6ec3302cb0dd3a280a26fc4a4ac70ddd4e689b3d85b56b0",
+  "limitations": [
+    "Windows runtime not tested",
+    "Zsh config written, fresh Zsh not executed",
+    "No model calls",
+    "No full tool/version matrix rerun"
+  ]
+}
