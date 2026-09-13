@@ -13,3 +13,6 @@ core.[0-9]*
 .DS_Store
 .env
 .env.*
+mise.local.toml
+mise.local.lock
+

@@ -1,0 +1,25 @@
+min_version = "2026.8.0"
+
+[tools]
+# Host/CI Node. Align with Dockerfile / Dockerfile.prebuilt image tags.
+# Not mirror.yaml node.version (intranet client download).
+node = "24.15.0"
+
+[env]
+_.path = ["{{config_root}}/node_modules/.bin"]
+
+[settings]
+idiomatic_version_file_enable_tools = []
+
+[tasks.install]
+description = "Install builder deps without lifecycle scripts"
+run = "npm ci --ignore-scripts --no-audit --no-fund"
+
+[tasks.check]
+run = "npm run check"
+
+[tasks.test]
+run = "npm test"
+
+[tasks.validate]
+run = "npm run validate"

@@ -94,6 +94,8 @@ flowchart TD
 | `mirror.yaml` | **唯一**人工维护的资源配置：工具版本、平台、Node、附加资源、已审核脚本指纹 |
 | `mirror-lock.json` | 工具及传递依赖的精确闭包（integrity、上游 URL）。与 yaml 的 `configHash` 绑定 |
 | `package-lock.json` | 构建器 / Verdaccio 等**本仓库**依赖，与镜像资源闭包无关 |
+| `mise.toml` | 构建机与 CI 的 Node 精确版本（不是镜像内给客户端下载的 Node） |
+| `mise.lock` | mise 工具校验和与下载 URL |
 | `src/config.ts` | 读取并校验 yaml：只接受精确 semver |
 | `src/resolve.ts` | 用项目自带 npm 11.12.1 解析各 root×平台；向 registry 拉 packument，不用 `--prefer-offline` |
 | `src/artifacts.ts` | 下载 tarball、脚本审核、Claude 原生二进制检查 |
@@ -122,7 +124,19 @@ flowchart TD
 
 ## 维护流程
 
-构建机：能访问 npm、nodejs.org、GitHub、Docker/Debian 源；本机 Node.js **≥ 24**（与 `engines` 一致）；首次完整构建预留 **≥ 15 GB**。部署机：x86_64 Linux + Docker，不必装 Node/Nginx/npm。
+构建机：能访问 npm、nodejs.org、GitHub、Docker/Debian 源；用 [mise](https://mise.jdx.dev) 安装与 CI、Dockerfile 相同的 Node.js **24.15.0**（`package.json` 的 `engines` 只是 ≥24 下限）；系统 Docker；首次完整构建预留 **≥ 15 GB**。部署机：x86_64 Linux + Docker，不必装 Node/Nginx/npm。
+
+`mise.toml` 只管构建机和 CI 的 Node，**不是** `mirror.yaml` 里给内网客户端下载的 Node。升构建用 Node 时同步改 `mise.toml`、`Dockerfile`、`Dockerfile.prebuilt`，再执行 `mise lock`；是否改 `mirror.yaml` 的 `node.version` 是产品配置，另作决定。
+
+首次进入本仓库：
+
+```bash
+# 若尚未安装 mise：https://mise.jdx.dev/installing-mise.html
+# zsh：在 ~/.zshrc 加入 eval "$(mise activate zsh)" 后重开终端
+mise trust
+mise install          # 按 mise.toml 安装 Node 24.15.0
+mise run install      # npm ci --ignore-scripts --no-audit --no-fund
+```
 
 ### 必须记住的边界
 
@@ -187,7 +201,7 @@ MIRROR_TAG=20260912 MIRROR_PORT=8080 docker compose up -d
 
 - **定时**：每月 1 日 00:00 UTC（北京时间 08:00）
 - **手动**：Actions 里选 “Monthly image” → Run workflow
-- **做什么**：`add-latest --config-only`（只追 Codex / DSH 的 npm `latest`）→ `build:mirror` → 提交变更后的 `mirror.yaml` / `mirror-lock.json` → `Dockerfile.prebuilt` 打镜像并推到 GHCR
+- **做什么**：按 `mise.toml` / `mise.lock` 安装 Node（`jdx/mise-action`）→ `add-latest --config-only`（只追 Codex / DSH 的 npm `latest`）→ `build:mirror` → 提交变更后的 `mirror.yaml` / `mirror-lock.json` → `Dockerfile.prebuilt` 打镜像并推到 GHCR
 
 `dist/`、`.mirror-work/`、镜像 tar **不进 git**。定时任务只在**默认分支**上的 workflow 文件生效；推送到 GitHub 并打开 Actions 之后才会跑。
 
