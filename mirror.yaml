@@ -8,37 +8,44 @@ platforms:
 # 只接受精确版本。新增版本后重新构建，不在内网自动更新。
 tools:
   claude:
-    versions: [ 2.1.265, 2.1.266 ]
-    defaultVersion: 2.1.266
+    versions: [ 2.1.265, 2.1.266, 2.1.285, 2.1.293 ]
+    defaultVersion: 2.1.293
   codex:
-    versions: [ 0.153.3, 0.153.4, 0.154.0 ]
-    defaultVersion: 0.154.0
+    versions: [ 0.153.3, 0.153.4, 0.154.0, 0.161.0 ]
+    defaultVersion: 0.161.0
   dsh:
-    versions: [ 0.1.2-alpha.5, 0.1.2-rc.1, 0.1.5-rc.1 ]
-    defaultVersion: 0.1.5-rc.1
+    versions: [ 0.1.2-alpha.5, 0.1.2-rc.1, 0.1.5-rc.1, 0.2.0-rc.2 ]
+    defaultVersion: 0.2.0-rc.2
 # 可选 npm 下载资源，不是工具安装的前置要求。
 npmPackages:
   - name: npm
-    versions: [ 12.0.2 ]
-    defaultVersion: 12.0.2
+    versions: [ 12.0.2, 12.2.0 ]
+    defaultVersion: 12.2.0
     description: 可选 npm 版本（无需为安装工具而升级）
 node:
-  version: 24.15.0
+  version: 24.21.0
 assets:
   - id: git-windows
-    version: 2.55.0.windows.5
-    filename: Git-2.55.0.5-64-bit.exe
-    url: https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.5/Git-2.55.0.5-64-bit.exe
-    sha256: d065a4e23c3d9a6b5073d609b5be0830227ec3ca053c083ba385061ddfaf94c6
+    version: 2.56.0.windows.2
+    filename: Git-2.56.0.2-64-bit.exe
+    url: https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.2/Git-2.56.0.2-64-bit.exe
+    sha256: 52188f917b378f00c70ec136bcf090005f30d44fbc4eba0bce759cc6592d60f6
     description: Git for Windows（含 Git Bash）
 # 生命周期脚本审核指纹由 build 的 script-audit.json 给出。
 # 构建器从不运行第三方安装脚本；审核通过后客户端安装才会运行。
 approvedScripts:
   '@anthropic-ai/claude-code@2.1.265': b787ed322cf693e807c9ffbf8f138448be473ff87a4e8b69d97a3cc6697a2c37
   '@anthropic-ai/claude-code@2.1.266': baddf861c4687d5741d1413614bb9a4a49474c9b7cf29cac87a4d85fbdba506a
+  '@anthropic-ai/claude-code@2.1.285': 6560abb7c2d71de8cdd164676a2386930e96f12c8c9c7e33b7548d2fbd734a92
+  '@anthropic-ai/claude-code@2.1.293': a96c76dfce0fd4b0449201ac16e6ac4f6517330a9a046b0f53197088f9a1dff4
   '@deepseek-ai/dsh-subprocess-local@0.1.2-rc.1': 13bd3fee6f578ea3bc14b802395be8872b412b527b118fedc3ff81fbdd963b2f
   '@deepseek-ai/dsh-subprocess-local@0.1.5-rc.2': e37f4fdd4bce67c79f4f006d96d2b8bc876d3d149d15254aaa03a3d72739a7c3
+  '@deepseek-ai/dsh-subprocess-local@0.1.5-rc.3': 8a5b3c80bc08508b6ad0e2bfa6d5d01a39f722c4c2adab539eaa8a02eabd3de6
+  '@deepseek-ai/dsh-subprocess-local@0.2.0-rc.2': 97e0ff8d96689a660a883b755f857fc8693d9114eadeb73694ef5e708eb0cc21
   '@google/genai@1.52.0': 0509f4c2b2de108e4741776b67c21c03fcb174e399ee6058b7c7601b895c1981
+  '@google/genai@2.21.0': 859e07d3fee1453ced3d60c2d48ce1b88894d2785b23f3cbd850c062bca1dfc6
+  'koffi@3.1.1': d6e3cb95f5d155d16cfe40f39ce09be18568c7f84dfb0b0722820a0da9e03b17
   'koffi@3.2.1': 9da0daf695cfdabcdcb36f3e4d1e26456522d6c4efb53f114f83474cd5d35373
+  'koffi@3.3.2': 1c5189a71bab92a3b429e82456d10254ce1a1528a1c49f87f4e93ce944426cb0
   'node-pty@1.2.0-beta.15': 114ac80c3fe075eff76217a4122d135576582695f49c03a5da3835cdfc2f89c5
   'protobufjs@7.6.6': df0241b3046b505d27396da6eef107f14dffb108f77aa89cfd9611a928eb6dfe
